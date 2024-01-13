@@ -1,0 +1,16 @@
+{
+  "name": "trpc-demo-new",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm -r --parallel --filter='./packages/*' run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@trpc/client": "10.45.0",
+    "@trpc/server": "10.45.0"
+  }
+}
