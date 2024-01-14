@@ -1,18 +1,16 @@
-import { PrismaClient } from '@prisma/client';
-import { initTRPC } from '@trpc/server';
 import { createHTTPServer } from '@trpc/server/adapters/standalone';
 import z from 'zod';
-
-const prisma = new PrismaClient();
-const t = initTRPC.create();
+import { userRouter } from './routers/user';
+import { prisma } from './utils/prisma';
+import { procedure, router } from './utils/trpc';
 
 // 定义一个路由
-const appRouter = t.router({
-  queryUser: t.procedure.query(async () => {
+const appRouter = router({
+  queryUser: procedure.query(async () => {
     const users = await prisma.user.findMany();
     return users;
   }),
-  queryUserById: t.procedure.input(z.number()).query(async (opts) => {
+  queryUserById: procedure.input(z.number()).query(async (opts) => {
     const users = await prisma.user.findUnique({
       where: {
         id: opts.input,
@@ -20,6 +18,7 @@ const appRouter = t.router({
     });
     return users;
   }),
+  user: userRouter,
 });
 
 // 创建一个服务，这里使用的是trpc自带的，也可以使用express，koa等

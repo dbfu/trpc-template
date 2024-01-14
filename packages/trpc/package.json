@@ -19,6 +19,7 @@
   "dependencies": {
     "@prisma/client": "5.8.0",
     "cors": "^2.8.5",
+    "prisma-extension-pagination": "^0.6.0",
     "zod": "^3.22.4"
   }
 }
